@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // routes
-import workoutsRouter from "./routes/workouts.js";
+import workoutsRouter from "./routes/routes.js";
 app.use("/api/workouts", workoutsRouter);
 
 // connect to db
