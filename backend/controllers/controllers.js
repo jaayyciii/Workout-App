@@ -1,3 +1,4 @@
+import mongoose, { mongo } from "mongoose";
 import Workout from "../models/models.js";
 
 // GET all workouts
@@ -13,6 +14,10 @@ export const getAllWorkouts = async (req, res) => {
 // GET a single workout
 export const getWorkout = async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Workout not found" });
+  }
 
   try {
     const workout = await Workout.findById(id);
@@ -41,6 +46,10 @@ export const createWorkout = async (req, res) => {
 export const deleteWorkout = async (req, res) => {
   const { id } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Workout not found" });
+  }
+
   try {
     const workout = await Workout.findByIdAndDelete(id);
     if (!workout) {
@@ -56,6 +65,10 @@ export const deleteWorkout = async (req, res) => {
 export const updateWorkout = async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Workout not found" });
+  }
 
   try {
     const workout = await Workout.findByIdAndUpdate(id, updatedData, {
