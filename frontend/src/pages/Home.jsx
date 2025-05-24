@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react";
+import { useWorkoutContext } from "../Context";
 import WorkoutDetails from "../components/WorkoutDetails";
+import WorkoutForm from "../components/WorkoutForm";
 
 export default function Home() {
-  const [workouts, setWorkouts] = useState(null);
-
-  useEffect(() => {
-    const fetchWorkouts = async () => {
-      try {
-        const response = await fetch("/api/workouts");
-        if (!response.ok) throw new Error("Failed to fetch workouts");
-        const json = await response.json();
-        setWorkouts(json);
-      } catch (error) {
-        setWorkouts([]);
-        console.error(error);
-      }
-    };
-
-    fetchWorkouts();
-  }, []);
+  const { workouts } = useWorkoutContext();
 
   return (
     <div className="home">
@@ -33,6 +18,7 @@ export default function Home() {
           <p>No workouts found.</p>
         )}
       </div>
+      <WorkoutForm />
     </div>
   );
 }
