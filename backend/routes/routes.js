@@ -14,7 +14,7 @@ router.get("/", getAllWorkouts);
 // GET a single workout
 router.get("/:id", getWorkout);
 
-// POST a new workout
+// CREATE a new workout
 router.post("/", createWorkout);
 
 // DELETE a workout

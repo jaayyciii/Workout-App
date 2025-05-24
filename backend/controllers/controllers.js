@@ -30,7 +30,7 @@ export const getWorkout = async (req, res) => {
   }
 };
 
-// POST a new workout
+// CREATE a new workout
 export const createWorkout = async (req, res) => {
   const { title, load, reps } = req.body;
 
