@@ -34,6 +34,23 @@ export const getWorkout = async (req, res) => {
 export const createWorkout = async (req, res) => {
   const { title, load, reps } = req.body;
 
+  let errorFields = [];
+
+  if (!title) {
+    errorFields.push("title");
+  }
+  if (!load) {
+    errorFields.push("load");
+  }
+  if (!reps) {
+    errorFields.push("reps");
+  }
+  if (errorFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all fields", errorFields });
+  }
+
   try {
     const workout = await Workout.create({ title, load, reps });
     res.status(201).json(workout);
