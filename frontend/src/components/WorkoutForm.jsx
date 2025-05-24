@@ -1,20 +1,28 @@
+import useWorkoutContext from "../hooks/useWorkoutContext.jsx";
 import { useState } from "react";
-import { useWorkoutContext } from "../Context";
 
 export default function WorkoutForm() {
-  const { createWorkout } = useWorkoutContext();
+  const { dispatch } = useWorkoutContext();
   const [workout, setWorkout] = useState({ title: "", load: "", reps: "" });
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    try {
-      await createWorkout(workout);
+
+    const response = await fetch("/api/workouts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(workout),
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: "CREATE_WORKOUT", payload: json });
       setWorkout({ title: "", load: "", reps: "" });
-    } catch (err) {
-      console.error("Error creating workout:", err);
-      setError("Failed to create workout. Please try again.");
+    } else {
+      setError(json.error);
     }
   };
 
