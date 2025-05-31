@@ -5,7 +5,7 @@ import {
   createWorkout,
   deleteWorkout,
   updateWorkout,
-} from "../controllers/controllers.js";
+} from "../controllers/workoutController.js";
 const router = express.Router();
 
 // GET all workouts

@@ -1,4 +1,4 @@
-import { WorkoutContext } from "../context/Context.jsx";
+import { WorkoutContext } from "../context/WorkoutContext.jsx";
 import { useContext } from "react";
 
 export default function useWorkoutContext() {

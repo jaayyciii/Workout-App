@@ -16,8 +16,10 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-import workoutsRouter from "./routes/routes.js";
+import workoutsRouter from "./routes/workouts.js";
+import userRouter from "./routes/user.js";
 app.use("/api/workouts", workoutsRouter);
+app.use("/api/user", userRouter);
 
 // connect to db
 mongoose

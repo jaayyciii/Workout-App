@@ -1,5 +1,5 @@
-import mongoose, { mongo } from "mongoose";
-import Workout from "../models/models.js";
+import mongoose from "mongoose";
+import Workout from "../models/workoutModel.js";
 
 // GET all workouts
 export const getAllWorkouts = async (req, res) => {
