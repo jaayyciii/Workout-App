@@ -19,6 +19,28 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
+// static login method
+userSchema.statics.login = async function (email, password) {
+  // validation
+  if (!email || !password) {
+    throw Error("All fields must be filled");
+  }
+
+  // find user by email
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error("Incorrect email");
+  }
+
+  // compare password with hashed password
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    throw Error("Incorrect password");
+  }
+
+  return user;
+};
+
 // static signup method
 userSchema.statics.signup = async function (email, password) {
   // validation
@@ -39,9 +61,11 @@ userSchema.statics.signup = async function (email, password) {
     throw Error("Email already in use");
   }
 
+  // bcrypt generates salt and hash the password
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
+  // create user to the database
   const user = await this.create({ email, password: hash });
 
   return user;
