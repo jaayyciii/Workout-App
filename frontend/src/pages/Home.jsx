@@ -1,6 +1,6 @@
 import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
-import useWorkoutContext from "../hooks/useWorkoutContext";
+import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useEffect } from "react";
 
 export default function Home() {

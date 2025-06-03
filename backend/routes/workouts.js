@@ -1,4 +1,5 @@
 import express from "express";
+import { requireAuth } from "../middleware/requireAuth.js";
 import {
   getAllWorkouts,
   getWorkout,
@@ -6,7 +7,9 @@ import {
   deleteWorkout,
   updateWorkout,
 } from "../controllers/workoutController.js";
+
 const router = express.Router();
+router.use(requireAuth); // Apply authentication middleware to all routes
 
 // GET all workouts
 router.get("/", getAllWorkouts);

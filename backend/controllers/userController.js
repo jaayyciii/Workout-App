@@ -10,7 +10,6 @@ const createToken = (_id) => {
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  // validation
   try {
     const user = await User.login(email, password);
     // create a token for the user

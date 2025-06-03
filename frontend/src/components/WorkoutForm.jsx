@@ -1,4 +1,4 @@
-import useWorkoutContext from "../hooks/useWorkoutContext.jsx";
+import { useWorkoutContext } from "../hooks/useWorkoutContext.jsx";
 import { useState } from "react";
 
 export default function WorkoutForm() {

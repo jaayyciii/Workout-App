@@ -1,4 +1,4 @@
-import useWorkoutContext from "../hooks/useWorkoutContext";
+import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 export default function WorkoutDetails({ workout }) {
