@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 import Layout from "./pages/Layout";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
@@ -9,10 +11,13 @@ export default function MainRouter() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<LogIn />} />
-          <Route path="signup" element={<Signup />} />
-          {/* Add more routes as needed */}
-          <Route path="home" element={<Home />} />
+          <Route element={<PublicRoute />}>
+            <Route index element={<LogIn />} />
+            <Route path="signup" element={<Signup />} />
+          </Route>
+          <Route path="home/*" element={<PrivateRoute />}>
+            <Route index element={<Home />} />
+          </Route>
         </Route>
       </Routes>
     </Router>
